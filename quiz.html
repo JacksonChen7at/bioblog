@@ -8,27 +8,26 @@
             background: #e8f5e9;
             margin: 0;
         }
-
         nav {
             background: #2e7d32;
             padding: 15px;
             text-align: center;
         }
-
         nav a {
             color: white;
             margin: 0 15px;
             text-decoration: none;
             font-weight: bold;
         }
-
+        nav a:hover {
+            text-decoration: underline;
+        }
         section {
             background: white;
             margin: 20px;
             padding: 20px;
             border-radius: 12px;
         }
-
         button {
             display: block;
             margin: 10px 0;
@@ -40,21 +39,13 @@
             cursor: pointer;
             font-size: 16px;
         }
-
         button:hover {
             background: #66bb6a;
         }
-
         #score {
             font-weight: bold;
             font-size: 18px;
             margin-bottom: 15px;
-        }
-
-        .final-message {
-            margin-top: 20px;
-            font-size: 20px;
-            font-weight: bold;
         }
     </style>
 </head>
@@ -68,70 +59,69 @@
 
 <p id="score">Score: 0</p>
 
-<!-- QUESTION 1 -->
-<section class="question">
+<section class="question" data-correct="0">
     <p>1. What process do plants use to make oxygen?</p>
-    <button onclick="checkAnswer(this, true)">Photosynthesis</button>
-    <button onclick="checkAnswer(this, false)">Respiration</button>
-    <button onclick="checkAnswer(this, false)">Digestion</button>
-    <button onclick="checkAnswer(this, false)">Evaporation</button>
+    <button onclick="answerQuestion(this, 0)">Photosynthesis</button>
+    <button onclick="answerQuestion(this, 1)">Respiration</button>
+    <button onclick="answerQuestion(this, 1)">Digestion</button>
+    <button onclick="answerQuestion(this, 1)">Evaporation</button>
 </section>
 
-<!-- QUESTION 2 -->
-<section class="question">
+<section class="question" data-correct="0">
     <p>2. What type of plant is moss?</p>
-    <button onclick="checkAnswer(this, true)">Bryophyte</button>
-    <button onclick="checkAnswer(this, false)">Gymnosperm</button>
-    <button onclick="checkAnswer(this, false)">Angiosperm</button>
-    <button onclick="checkAnswer(this, false)">Fungus</button>
+    <button onclick="answerQuestion(this, 0)">Bryophyte</button>
+    <button onclick="answerQuestion(this, 1)">Gymnosperm</button>
+    <button onclick="answerQuestion(this, 1)">Angiosperm</button>
+    <button onclick="answerQuestion(this, 1)">Fungus</button>
 </section>
 
-<!-- QUESTION 3 -->
-<section class="question">
+<section class="question" data-correct="0">
     <p>3. How do ferns reproduce?</p>
-    <button onclick="checkAnswer(this, true)">Spores</button>
-    <button onclick="checkAnswer(this, false)">Seeds</button>
-    <button onclick="checkAnswer(this, false)">Flowers</button>
-    <button onclick="checkAnswer(this, false)">Roots</button>
+    <button onclick="answerQuestion(this, 0)">Spores</button>
+    <button onclick="answerQuestion(this, 1)">Seeds</button>
+    <button onclick="answerQuestion(this, 1)">Flowers</button>
+    <button onclick="answerQuestion(this, 1)">Roots</button>
 </section>
 
-<!-- QUESTION 4 -->
-<section class="question">
+<section class="question" data-correct="0">
     <p>4. What carries water in plants?</p>
-    <button onclick="checkAnswer(this, true)">Xylem</button>
-    <button onclick="checkAnswer(this, false)">Phloem</button>
-    <button onclick="checkAnswer(this, false)">Roots</button>
-    <button onclick="checkAnswer(this, false)">Leaves</button>
+    <button onclick="answerQuestion(this, 0)">Xylem</button>
+    <button onclick="answerQuestion(this, 1)">Phloem</button>
+    <button onclick="answerQuestion(this, 1)">Roots</button>
+    <button onclick="answerQuestion(this, 1)">Leaves</button>
 </section>
 
-<!-- QUESTION 5 -->
-<section class="question">
+<section class="question" data-correct="0">
     <p>5. What molecule carries genetic information in plants?</p>
-    <button onclick="checkAnswer(this, true)">DNA</button>
-    <button onclick="checkAnswer(this, false)">Oxygen</button>
-    <button onclick="checkAnswer(this, false)">Water</button>
-    <button onclick="checkAnswer(this, false)">Chlorophyll</button>
+    <button onclick="answerQuestion(this, 0)">DNA</button>
+    <button onclick="answerQuestion(this, 1)">Oxygen</button>
+    <button onclick="answerQuestion(this, 1)">Water</button>
+    <button onclick="answerQuestion(this, 1)">Chlorophyll</button>
 </section>
 
-<!-- QUESTION 6 -->
-<section class="question">
+<section class="question" data-correct="0">
     <p>6. Which part of a plant makes food?</p>
-    <button onclick="checkAnswer(this, true)">Leaves</button>
-    <button onclick="checkAnswer(this, false)">Roots</button>
-    <button onclick="checkAnswer(this, false)">Stem</button>
-    <button onclick="checkAnswer(this, false)">Flowers</button>
+    <button onclick="answerQuestion(this, 0)">Leaves</button>
+    <button onclick="answerQuestion(this, 1)">Roots</button>
+    <button onclick="answerQuestion(this, 1)">Stem</button>
+    <button onclick="answerQuestion(this, 1)">Flowers</button>
 </section>
 
-<div class="final-message" id="finalMessage"></div>
+<p id="finalMessage"></p>
 
 <script>
 let score = 0;
 
-function checkAnswer(button, correct) {
-    if (button.disabled) return;
+function answerQuestion(button, value) {
+    const section = button.parentNode;
 
-    // Set button color
-    if (correct) {
+    // Prevent clicking more than once per question
+    if (section.dataset.answered === "true") return;
+
+    section.dataset.answered = "true";
+
+    // Correct answer is always index 0
+    if (value === 0) {
         button.style.background = "green";
         button.innerText = "✅ Correct!";
         score++;
@@ -140,28 +130,19 @@ function checkAnswer(button, correct) {
         button.innerText = "❌ Wrong";
     }
 
-    // Disable only buttons in the same question
-    const questionSection = button.parentNode;
-    const buttons = questionSection.querySelectorAll('button');
+    // Disable all buttons in this question
+    const buttons = section.querySelectorAll("button");
     buttons.forEach(b => b.disabled = true);
 
-    // Update score
     document.getElementById("score").innerText = "Score: " + score;
 
     // Check if all questions answered
-    const allSections = document.querySelectorAll('.question');
-    let allAnswered = true;
-    allSections.forEach(section => {
-        const btns = section.querySelectorAll('button');
-        if (Array.from(btns).some(b => !b.disabled)) {
-            allAnswered = false;
-        }
-    });
-
+    const allAnswered = Array.from(document.querySelectorAll(".question")).every(q => q.dataset.answered === "true");
     if (allAnswered) {
+        const total = document.querySelectorAll(".question").length;
         let msg = "";
-        if (score === allSections.length) msg = "🏆 Plant Master! Perfect Score!";
-        else if (score >= 4) msg = "🌿 Great Job! You know your plants!";
+        if (score === total) msg = "🏆 Plant Master! Perfect Score!";
+        else if (score >= total / 2) msg = "🌿 Great Job! You know your plants!";
         else msg = "🌱 Keep learning! Plants are amazing!";
         document.getElementById("finalMessage").innerText = msg;
     }
