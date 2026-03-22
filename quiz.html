@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>Plant Quiz</title>
-
     <style>
         body {
             font-family: Arial;
@@ -10,6 +9,7 @@
             margin: 0;
         }
 
+        /* NAVBAR */
         nav {
             background: #2e7d32;
             padding: 15px;
@@ -21,6 +21,10 @@
             margin: 0 15px;
             text-decoration: none;
             font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
         }
 
         section {
@@ -39,27 +43,42 @@
             border-radius: 8px;
             background: #81c784;
             cursor: pointer;
+            font-size: 16px;
         }
 
         button:hover {
             background: #66bb6a;
+        }
+
+        #score {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .final-message {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
         }
     </style>
 </head>
 
 <body>
 
+<!-- NAVBAR -->
 <nav>
     <a href="index.html">Home</a>
+    <a href="learn.html">Learn More</a>
     <a href="quiz.html">Quiz</a>
 </nav>
 
 <section>
-    <h2>🧠 Plant Quiz</h2>
+    <h1>🧠 Plant Quiz</h1>
+    <p id="score">Score: 0</p>
 
     <!-- QUESTION 1 -->
     <p>1. What process do plants use to make oxygen?</p>
-
     <button onclick="checkAnswer(this, true)">Photosynthesis</button>
     <button onclick="checkAnswer(this, false)">Respiration</button>
     <button onclick="checkAnswer(this, false)">Digestion</button>
@@ -67,7 +86,6 @@
 
     <!-- QUESTION 2 -->
     <p>2. What type of plant is moss?</p>
-
     <button onclick="checkAnswer(this, true)">Bryophyte</button>
     <button onclick="checkAnswer(this, false)">Gymnosperm</button>
     <button onclick="checkAnswer(this, false)">Angiosperm</button>
@@ -75,22 +93,66 @@
 
     <!-- QUESTION 3 -->
     <p>3. How do ferns reproduce?</p>
-
     <button onclick="checkAnswer(this, true)">Spores</button>
     <button onclick="checkAnswer(this, false)">Seeds</button>
     <button onclick="checkAnswer(this, false)">Flowers</button>
     <button onclick="checkAnswer(this, false)">Roots</button>
 
+    <!-- QUESTION 4 -->
+    <p>4. What carries water in plants?</p>
+    <button onclick="checkAnswer(this, true)">Xylem</button>
+    <button onclick="checkAnswer(this, false)">Phloem</button>
+    <button onclick="checkAnswer(this, false)">Roots</button>
+    <button onclick="checkAnswer(this, false)">Leaves</button>
+
+    <!-- QUESTION 5 -->
+    <p>5. What molecule carries genetic information in plants?</p>
+    <button onclick="checkAnswer(this, true)">DNA</button>
+    <button onclick="checkAnswer(this, false)">Oxygen</button>
+    <button onclick="checkAnswer(this, false)">Water</button>
+    <button onclick="checkAnswer(this, false)">Chlorophyll</button>
+
+    <!-- QUESTION 6 -->
+    <p>6. Which part of a plant makes food?</p>
+    <button onclick="checkAnswer(this, true)">Leaves</button>
+    <button onclick="checkAnswer(this, false)">Roots</button>
+    <button onclick="checkAnswer(this, false)">Stem</button>
+    <button onclick="checkAnswer(this, false)">Flowers</button>
+
+    <div class="final-message" id="finalMessage"></div>
 </section>
 
 <script>
+let score = 0;
+
 function checkAnswer(button, correct) {
+    if (button.disabled) return;
+
     if (correct) {
         button.style.background = "green";
         button.innerText = "✅ Correct!";
+        score++;
     } else {
         button.style.background = "red";
         button.innerText = "❌ Wrong";
+    }
+
+    // Disable all buttons for this question
+    let buttons = button.parentNode.querySelectorAll('button');
+    buttons.forEach(b => b.disabled = true);
+
+    // Update score display
+    document.getElementById("score").innerText = "Score: " + score;
+
+    // Check if all questions are answered
+    let allButtons = document.querySelectorAll('section button');
+    let unanswered = Array.from(allButtons).some(b => !b.disabled);
+    if (!unanswered) {
+        let msg = "";
+        if (score === 6) msg = "🏆 Plant Master! Perfect Score!";
+        else if (score >= 4) msg = "🌿 Great Job! You know your plants!";
+        else msg = "🌱 Keep learning! Plants are amazing!";
+        document.getElementById("finalMessage").innerText = msg;
     }
 }
 </script>
