@@ -66,74 +66,71 @@
     <a href="quiz.html">Quiz</a>
 </nav>
 
-<section>
-    <h1>🧠 Plant Quiz</h1>
-    <p id="score">Score: 0</p>
+<p id="score">Score: 0</p>
 
-    <!-- QUESTION 1 -->
-    <div class="question">
-        <p>1. What process do plants use to make oxygen?</p>
-        <button onclick="checkAnswer(this, true)">Photosynthesis</button>
-        <button onclick="checkAnswer(this, false)">Respiration</button>
-        <button onclick="checkAnswer(this, false)">Digestion</button>
-        <button onclick="checkAnswer(this, false)">Evaporation</button>
-    </div>
-
-    <!-- QUESTION 2 -->
-    <div class="question">
-        <p>2. What type of plant is moss?</p>
-        <button onclick="checkAnswer(this, true)">Bryophyte</button>
-        <button onclick="checkAnswer(this, false)">Gymnosperm</button>
-        <button onclick="checkAnswer(this, false)">Angiosperm</button>
-        <button onclick="checkAnswer(this, false)">Fungus</button>
-    </div>
-
-    <!-- QUESTION 3 -->
-    <div class="question">
-        <p>3. How do ferns reproduce?</p>
-        <button onclick="checkAnswer(this, true)">Spores</button>
-        <button onclick="checkAnswer(this, false)">Seeds</button>
-        <button onclick="checkAnswer(this, false)">Flowers</button>
-        <button onclick="checkAnswer(this, false)">Roots</button>
-    </div>
-
-    <!-- QUESTION 4 -->
-    <div class="question">
-        <p>4. What carries water in plants?</p>
-        <button onclick="checkAnswer(this, true)">Xylem</button>
-        <button onclick="checkAnswer(this, false)">Phloem</button>
-        <button onclick="checkAnswer(this, false)">Roots</button>
-        <button onclick="checkAnswer(this, false)">Leaves</button>
-    </div>
-
-    <!-- QUESTION 5 -->
-    <div class="question">
-        <p>5. What molecule carries genetic information in plants?</p>
-        <button onclick="checkAnswer(this, true)">DNA</button>
-        <button onclick="checkAnswer(this, false)">Oxygen</button>
-        <button onclick="checkAnswer(this, false)">Water</button>
-        <button onclick="checkAnswer(this, false)">Chlorophyll</button>
-    </div>
-
-    <!-- QUESTION 6 -->
-    <div class="question">
-        <p>6. Which part of a plant makes food?</p>
-        <button onclick="checkAnswer(this, true)">Leaves</button>
-        <button onclick="checkAnswer(this, false)">Roots</button>
-        <button onclick="checkAnswer(this, false)">Stem</button>
-        <button onclick="checkAnswer(this, false)">Flowers</button>
-    </div>
-
-    <div class="final-message" id="finalMessage"></div>
+<!-- QUESTION 1 -->
+<section class="question">
+    <p>1. What process do plants use to make oxygen?</p>
+    <button onclick="checkAnswer(this, true)">Photosynthesis</button>
+    <button onclick="checkAnswer(this, false)">Respiration</button>
+    <button onclick="checkAnswer(this, false)">Digestion</button>
+    <button onclick="checkAnswer(this, false)">Evaporation</button>
 </section>
+
+<!-- QUESTION 2 -->
+<section class="question">
+    <p>2. What type of plant is moss?</p>
+    <button onclick="checkAnswer(this, true)">Bryophyte</button>
+    <button onclick="checkAnswer(this, false)">Gymnosperm</button>
+    <button onclick="checkAnswer(this, false)">Angiosperm</button>
+    <button onclick="checkAnswer(this, false)">Fungus</button>
+</section>
+
+<!-- QUESTION 3 -->
+<section class="question">
+    <p>3. How do ferns reproduce?</p>
+    <button onclick="checkAnswer(this, true)">Spores</button>
+    <button onclick="checkAnswer(this, false)">Seeds</button>
+    <button onclick="checkAnswer(this, false)">Flowers</button>
+    <button onclick="checkAnswer(this, false)">Roots</button>
+</section>
+
+<!-- QUESTION 4 -->
+<section class="question">
+    <p>4. What carries water in plants?</p>
+    <button onclick="checkAnswer(this, true)">Xylem</button>
+    <button onclick="checkAnswer(this, false)">Phloem</button>
+    <button onclick="checkAnswer(this, false)">Roots</button>
+    <button onclick="checkAnswer(this, false)">Leaves</button>
+</section>
+
+<!-- QUESTION 5 -->
+<section class="question">
+    <p>5. What molecule carries genetic information in plants?</p>
+    <button onclick="checkAnswer(this, true)">DNA</button>
+    <button onclick="checkAnswer(this, false)">Oxygen</button>
+    <button onclick="checkAnswer(this, false)">Water</button>
+    <button onclick="checkAnswer(this, false)">Chlorophyll</button>
+</section>
+
+<!-- QUESTION 6 -->
+<section class="question">
+    <p>6. Which part of a plant makes food?</p>
+    <button onclick="checkAnswer(this, true)">Leaves</button>
+    <button onclick="checkAnswer(this, false)">Roots</button>
+    <button onclick="checkAnswer(this, false)">Stem</button>
+    <button onclick="checkAnswer(this, false)">Flowers</button>
+</section>
+
+<div class="final-message" id="finalMessage"></div>
 
 <script>
 let score = 0;
 
 function checkAnswer(button, correct) {
-    // Prevent clicking same button again
     if (button.disabled) return;
 
+    // Set button color
     if (correct) {
         button.style.background = "green";
         button.innerText = "✅ Correct!";
@@ -143,20 +140,27 @@ function checkAnswer(button, correct) {
         button.innerText = "❌ Wrong";
     }
 
-    // Disable all buttons in THIS question only
-    const questionDiv = button.parentNode;
-    const buttons = questionDiv.querySelectorAll('button');
+    // Disable only buttons in the same question
+    const questionSection = button.parentNode;
+    const buttons = questionSection.querySelectorAll('button');
     buttons.forEach(b => b.disabled = true);
 
-    // Update score display
+    // Update score
     document.getElementById("score").innerText = "Score: " + score;
 
-    // Check if all questions are answered
-    const allButtons = document.querySelectorAll('.question button');
-    const unanswered = Array.from(allButtons).some(b => !b.disabled);
-    if (!unanswered) {
+    // Check if all questions answered
+    const allSections = document.querySelectorAll('.question');
+    let allAnswered = true;
+    allSections.forEach(section => {
+        const btns = section.querySelectorAll('button');
+        if (Array.from(btns).some(b => !b.disabled)) {
+            allAnswered = false;
+        }
+    });
+
+    if (allAnswered) {
         let msg = "";
-        if (score === 6) msg = "🏆 Plant Master! Perfect Score!";
+        if (score === allSections.length) msg = "🏆 Plant Master! Perfect Score!";
         else if (score >= 4) msg = "🌿 Great Job! You know your plants!";
         else msg = "🌱 Keep learning! Plants are amazing!";
         document.getElementById("finalMessage").innerText = msg;
