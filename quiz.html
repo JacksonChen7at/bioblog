@@ -9,7 +9,6 @@
             margin: 0;
         }
 
-        /* NAVBAR */
         nav {
             background: #2e7d32;
             padding: 15px;
@@ -21,10 +20,6 @@
             margin: 0 15px;
             text-decoration: none;
             font-weight: bold;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
         }
 
         section {
@@ -63,10 +58,8 @@
         }
     </style>
 </head>
-
 <body>
 
-<!-- NAVBAR -->
 <nav>
     <a href="index.html">Home</a>
     <a href="learn.html">Learn More</a>
@@ -78,46 +71,58 @@
     <p id="score">Score: 0</p>
 
     <!-- QUESTION 1 -->
-    <p>1. What process do plants use to make oxygen?</p>
-    <button onclick="checkAnswer(this, true)">Photosynthesis</button>
-    <button onclick="checkAnswer(this, false)">Respiration</button>
-    <button onclick="checkAnswer(this, false)">Digestion</button>
-    <button onclick="checkAnswer(this, false)">Evaporation</button>
+    <div class="question">
+        <p>1. What process do plants use to make oxygen?</p>
+        <button onclick="checkAnswer(this, true)">Photosynthesis</button>
+        <button onclick="checkAnswer(this, false)">Respiration</button>
+        <button onclick="checkAnswer(this, false)">Digestion</button>
+        <button onclick="checkAnswer(this, false)">Evaporation</button>
+    </div>
 
     <!-- QUESTION 2 -->
-    <p>2. What type of plant is moss?</p>
-    <button onclick="checkAnswer(this, true)">Bryophyte</button>
-    <button onclick="checkAnswer(this, false)">Gymnosperm</button>
-    <button onclick="checkAnswer(this, false)">Angiosperm</button>
-    <button onclick="checkAnswer(this, false)">Fungus</button>
+    <div class="question">
+        <p>2. What type of plant is moss?</p>
+        <button onclick="checkAnswer(this, true)">Bryophyte</button>
+        <button onclick="checkAnswer(this, false)">Gymnosperm</button>
+        <button onclick="checkAnswer(this, false)">Angiosperm</button>
+        <button onclick="checkAnswer(this, false)">Fungus</button>
+    </div>
 
     <!-- QUESTION 3 -->
-    <p>3. How do ferns reproduce?</p>
-    <button onclick="checkAnswer(this, true)">Spores</button>
-    <button onclick="checkAnswer(this, false)">Seeds</button>
-    <button onclick="checkAnswer(this, false)">Flowers</button>
-    <button onclick="checkAnswer(this, false)">Roots</button>
+    <div class="question">
+        <p>3. How do ferns reproduce?</p>
+        <button onclick="checkAnswer(this, true)">Spores</button>
+        <button onclick="checkAnswer(this, false)">Seeds</button>
+        <button onclick="checkAnswer(this, false)">Flowers</button>
+        <button onclick="checkAnswer(this, false)">Roots</button>
+    </div>
 
     <!-- QUESTION 4 -->
-    <p>4. What carries water in plants?</p>
-    <button onclick="checkAnswer(this, true)">Xylem</button>
-    <button onclick="checkAnswer(this, false)">Phloem</button>
-    <button onclick="checkAnswer(this, false)">Roots</button>
-    <button onclick="checkAnswer(this, false)">Leaves</button>
+    <div class="question">
+        <p>4. What carries water in plants?</p>
+        <button onclick="checkAnswer(this, true)">Xylem</button>
+        <button onclick="checkAnswer(this, false)">Phloem</button>
+        <button onclick="checkAnswer(this, false)">Roots</button>
+        <button onclick="checkAnswer(this, false)">Leaves</button>
+    </div>
 
     <!-- QUESTION 5 -->
-    <p>5. What molecule carries genetic information in plants?</p>
-    <button onclick="checkAnswer(this, true)">DNA</button>
-    <button onclick="checkAnswer(this, false)">Oxygen</button>
-    <button onclick="checkAnswer(this, false)">Water</button>
-    <button onclick="checkAnswer(this, false)">Chlorophyll</button>
+    <div class="question">
+        <p>5. What molecule carries genetic information in plants?</p>
+        <button onclick="checkAnswer(this, true)">DNA</button>
+        <button onclick="checkAnswer(this, false)">Oxygen</button>
+        <button onclick="checkAnswer(this, false)">Water</button>
+        <button onclick="checkAnswer(this, false)">Chlorophyll</button>
+    </div>
 
     <!-- QUESTION 6 -->
-    <p>6. Which part of a plant makes food?</p>
-    <button onclick="checkAnswer(this, true)">Leaves</button>
-    <button onclick="checkAnswer(this, false)">Roots</button>
-    <button onclick="checkAnswer(this, false)">Stem</button>
-    <button onclick="checkAnswer(this, false)">Flowers</button>
+    <div class="question">
+        <p>6. Which part of a plant makes food?</p>
+        <button onclick="checkAnswer(this, true)">Leaves</button>
+        <button onclick="checkAnswer(this, false)">Roots</button>
+        <button onclick="checkAnswer(this, false)">Stem</button>
+        <button onclick="checkAnswer(this, false)">Flowers</button>
+    </div>
 
     <div class="final-message" id="finalMessage"></div>
 </section>
@@ -126,6 +131,7 @@
 let score = 0;
 
 function checkAnswer(button, correct) {
+    // Prevent clicking same button again
     if (button.disabled) return;
 
     if (correct) {
@@ -137,16 +143,17 @@ function checkAnswer(button, correct) {
         button.innerText = "❌ Wrong";
     }
 
-    // Disable all buttons for this question
-    let buttons = button.parentNode.querySelectorAll('button');
+    // Disable all buttons in THIS question only
+    const questionDiv = button.parentNode;
+    const buttons = questionDiv.querySelectorAll('button');
     buttons.forEach(b => b.disabled = true);
 
     // Update score display
     document.getElementById("score").innerText = "Score: " + score;
 
     // Check if all questions are answered
-    let allButtons = document.querySelectorAll('section button');
-    let unanswered = Array.from(allButtons).some(b => !b.disabled);
+    const allButtons = document.querySelectorAll('.question button');
+    const unanswered = Array.from(allButtons).some(b => !b.disabled);
     if (!unanswered) {
         let msg = "";
         if (score === 6) msg = "🏆 Plant Master! Perfect Score!";
