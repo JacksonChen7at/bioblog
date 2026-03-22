@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plant Quiz</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #e8f5e9;
+            margin: 0;
+        }
+
+        nav {
+            background: #2e7d32;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        section {
+            background: white;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        button {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            background: #81c784;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #66bb6a;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="quiz.html">Quiz</a>
+</nav>
+
+<section>
+    <h2>🧠 Plant Quiz</h2>
+
+    <!-- QUESTION 1 -->
+    <p>1. What process do plants use to make oxygen?</p>
+
+    <button onclick="checkAnswer(this, true)">Photosynthesis</button>
+    <button onclick="checkAnswer(this, false)">Respiration</button>
+    <button onclick="checkAnswer(this, false)">Digestion</button>
+    <button onclick="checkAnswer(this, false)">Evaporation</button>
+
+    <!-- QUESTION 2 -->
+    <p>2. What type of plant is moss?</p>
+
+    <button onclick="checkAnswer(this, true)">Bryophyte</button>
+    <button onclick="checkAnswer(this, false)">Gymnosperm</button>
+    <button onclick="checkAnswer(this, false)">Angiosperm</button>
+    <button onclick="checkAnswer(this, false)">Fungus</button>
+
+    <!-- QUESTION 3 -->
+    <p>3. How do ferns reproduce?</p>
+
+    <button onclick="checkAnswer(this, true)">Spores</button>
+    <button onclick="checkAnswer(this, false)">Seeds</button>
+    <button onclick="checkAnswer(this, false)">Flowers</button>
+    <button onclick="checkAnswer(this, false)">Roots</button>
+
+</section>
+
+<script>
+function checkAnswer(button, correct) {
+    if (correct) {
+        button.style.background = "green";
+        button.innerText = "✅ Correct!";
+    } else {
+        button.style.background = "red";
+        button.innerText = "❌ Wrong";
+    }
+}
+</script>
+
+</body>
+</html>
