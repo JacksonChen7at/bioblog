@@ -2,68 +2,139 @@
 <html>
 <head>
     <title>Green Machines: How Plants Keep Us Alive</title>
+
     <style>
         body {
-            font-family: Arial;
-            background: linear-gradient(to right, #a8e063, #56ab2f);
             margin: 0;
-            color: #333;
+            font-family: Arial;
+            background: #f0f8f0;
         }
+
+        /* NAVBAR */
+        nav {
+            background: #2e7d32;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
         header {
             text-align: center;
-            padding: 30px;
+            padding: 40px;
+            background: linear-gradient(to right, #56ab2f, #a8e063);
             color: white;
         }
+
         section {
             background: white;
             margin: 20px;
             padding: 20px;
-            border-radius: 15px;
+            border-radius: 12px;
         }
+
         img {
             width: 250px;
             border-radius: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            background: #388e3c;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #2e7d32;
         }
     </style>
 </head>
 
 <body>
 
-<header>
-    <h1>🌿 Green Machines: How Plants Keep Us Alive</h1>
-    <p>The hidden power of plants 🌎</p>
+<!-- NAVBAR -->
+<nav>
+    <a href="#home">Home</a>
+    <a href="#importance">Why Plants Matter</a>
+    <a href="#bryophyte">Bryophytes</a>
+    <a href="#pteridophyte">Pteridophytes</a>
+    <a href="#quiz">Quiz</a>
+</nav>
+
+<!-- HEADER -->
+<header id="home">
+    <h1>🌿 Green Machines</h1>
+    <p>How Plants Keep Us Alive 🌎</p>
 </header>
 
+<!-- INTRO -->
 <section>
     <h2>🌱 Introduction</h2>
     <p>Plants are essential to life on Earth. They provide oxygen, food, and support ecosystems. Without plants, life would not exist.</p>
+    <a href="#importance" class="btn">Learn Why Plants Matter</a>
 </section>
 
-<section>
+<!-- IMPORTANCE -->
+<section id="importance">
     <h2>🌍 Why Plants Matter</h2>
+
     <p><b>Oxygen:</b> Plants produce oxygen through photosynthesis.</p>
     <p><b>Food:</b> Plants are the base of the food chain.</p>
     <p><b>Wildlife:</b> Animals depend on plants for shelter.</p>
     <p><b>Climate:</b> Plants absorb carbon dioxide and help fight climate change.</p>
 </section>
 
-<section>
+<!-- BRYOPHYTE -->
+<section id="bryophyte">
     <h2>🌿 Bryophyte: Moss</h2>
     <p><b>Scientific Name:</b> Bryophyta</p>
-    <p>Mosses grow in damp areas and absorb water through their leaves.</p>
+    <p>Mosses are small plants that grow in damp areas and absorb water through their leaves.</p>
+    <p><b>Fun Fact:</b> Moss can survive extreme environments like the Arctic!</p>
+
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Moss.jpg">
 </section>
 
-<section>
+<!-- PTERIDOPHYTE -->
+<section id="pteridophyte">
     <h2>🌿 Pteridophyte: Fern</h2>
     <p><b>Scientific Name:</b> Pteridophyta</p>
     <p>Ferns reproduce using spores instead of seeds.</p>
+    <p><b>Fun Fact:</b> Ferns existed over 360 million years ago!</p>
+
     <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fern.jpg">
 </section>
 
+<!-- QUIZ -->
+<section id="quiz">
+    <h2>🧠 Quick Quiz</h2>
+
+    <p>1. What process do plants use to make oxygen?</p>
+    <p><b>Answer:</b> Photosynthesis</p>
+
+    <p>2. What type of plant is moss?</p>
+    <p><b>Answer:</b> Bryophyte</p>
+
+    <p>3. How do ferns reproduce?</p>
+    <p><b>Answer:</b> Spores</p>
+</section>
+
+<!-- CONCLUSION -->
 <section>
     <h2>🔚 Conclusion</h2>
-    <p>Plants are essential for life. We must protect them for the future.</p>
+    <p>Plants are essential for life. They provide oxygen, food, and help maintain Earth's climate. We must protect them.</p>
 </section>
 
 </body>
