@@ -14,6 +14,9 @@
             background: #2e7d32;
             padding: 15px;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         nav a {
@@ -35,6 +38,15 @@
             margin: 20px;
             padding: 20px;
             border-radius: 12px;
+
+            opacity: 0;           /* start invisible */
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         h2 {
@@ -87,18 +99,18 @@
 
     <p><b>Oxygen Production:</b> Plants release oxygen by photosynthesis. This process is important because most living organisms need oxygen to survive.</p>
 
-    <p><b>Food Source:</b> Plants is the primary source of food for all living things. Even animals that only eat meat need plants, as the meat they eat gets its food from plants..</p>
+    <p><b>Food Source:</b> Plants are the primary source of food for all living things. Even animals that only eat meat need plants, as the meat they eat gets its food from plants.</p>
 
     <p><b>Habitat for Animals:</b> Some animals need plants for shelter. For example, squirrels live in trees and some insects hide in plants to keep themselves safe from animals that will eat them.</p>
 
-    <p><b>Climate Regulation:</b> Plants help control the climate by getting carbon dioxide from the atmosphere and storing it and transfer to oxygen</p>
+    <p><b>Climate Regulation:</b> Plants help control the climate by taking in carbon dioxide and releasing oxygen.</p>
 
     <div class="fact">
         Fun Fact: Some trees release hundreds of liters of water vapor every day, which goes into the atmosphere and cools our environment.
     </div>
 
     <div class="fact">
-        Fun Fact: Without plants soil would wash away more easily because roots help keep it in place.
+        Fun Fact: Without plants, soil would wash away more easily because roots help keep it in place.
     </div>
 </section>
 
@@ -107,7 +119,7 @@
 
     <p><b>Scientific Name:</b> Bryophyta</p>
 
-    <p><b>Description:</b> Mosses are small plants that grow in clusters and stay close to the ground. different from most plants, they do not have a roots, stems, or leaves. Instead they absorb water directly from their surroundings.</p>
+    <p><b>Description:</b> Mosses are small plants that grow in clusters and stay close to the ground. Unlike most plants, they do not have roots, stems, or leaves. Instead, they absorb water directly from their surroundings.</p>
 
     <p><b>Habitat:</b> Moss is usually found in moist, shaded areas such as forest floors, rocks, and near streams.</p>
 
@@ -115,8 +127,7 @@
        Fun Fact: Moss can dry out completely and still come back to life when it gets water again.
     </div>
 
-    <img src="https://en.wikipedia.org/wiki/Moss#/media/File:Steinerne_Rinne_bei_Obererasbach_im_Altm%C3%BChltal.jpg">
-
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Moss.jpg">
 </section>
 
 <section id="pteridophyte">
@@ -124,7 +135,7 @@
 
     <p><b>Scientific Name:</b> Pteridophyta</p>
 
-    <p><b>Description:</b> Ferns are plants with long divided leaves called fronds, They do not produce flowers or seeds and instead reproduce using spores.</p>
+    <p><b>Description:</b> Ferns are plants with long divided leaves called fronds. They do not produce flowers or seeds and instead reproduce using spores.</p>
 
     <p><b>Habitat:</b> Ferns grow best in damp, shaded environments, especially in forests and areas with high humidity.</p>
 
@@ -132,8 +143,7 @@
         Fun Fact: Some ferns can grow extremely large, with leaves that reach several feet in length.
     </div>
 
-    <img data-companylocation="New York, NY" data-companyname="Shutterstock.com" itemprop="url" src="/pictures/images/263x300Exact_44x0/site_3/australian-tree-fern-cyathea-cooperi-shutterstock-com_17258.jpg">
-
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fern.jpg">
 </section>
 
 <section id="conclusion">
@@ -145,6 +155,28 @@
 <footer>
     <p>Biology Blog Project</p>
 </footer>
+
+<script>
+    // Scroll fade-in animation
+    const sections = document.querySelectorAll("section");
+
+    function showSections() {
+        const triggerBottom = window.innerHeight * 0.85;
+
+        sections.forEach(section => {
+            const sectionTop = section.getBoundingClientRect().top;
+
+            if(sectionTop < triggerBottom) {
+                section.classList.add("visible");
+            }
+        });
+    }
+
+    window.addEventListener("scroll", showSections);
+
+    // Show sections on load
+    showSections();
+</script>
 
 </body>
 </html>
