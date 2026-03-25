@@ -2,117 +2,153 @@
 <html>
 <head>
 <link rel="icon" href="https://jacksonchen7at.github.io/bioblog/plant.png">
-    <title>Silent Heroes: Why Plants Matter</title>
+<title>Silent Heroes: Why Plants Matter</title>
 
-    <style>
-        body {
-            font-family: Arial;
-            margin: 0;
-            background: #f4f8f4;
-        }
+<style>
+    body {
+        font-family: Arial;
+        margin: 0;
+        background: #f4f8f4;
+    }
 
-        nav {
-            background: #2e7d32;
-            padding: 15px;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+    /* Navbar */
+    nav {
+        background: #2e7d32;
+        padding: 15px;
+        text-align: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
 
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
-        }
+    nav a {
+        text-decoration: none;
+    }
 
-        header {
-            background: linear-gradient(to right, #56ab2f, #a8e063);
-            color: white;
-            text-align: center;
-            padding: 50px 20px;
-        }
+    .menu-item {
+        color: white;
+        margin: 0 15px;
+        font-weight: bold;
+        position: relative;
+        padding: 5px 10px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
 
-        section {
-            background: white;
-            margin: 20px;
-            padding: 20px;
-            border-radius: 12px;
+    /* Hover glow */
+    .menu-item:hover {
+        background: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+        transform: translateY(-2px);
+    }
 
-            /* Slide-in animation */
-            opacity: 0;           
-            transform: translateY(50px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out, box-shadow 0.3s;
-        }
+    /* Tooltip for menu items */
+    .menu-item::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #56ab2f;
+        color: white;
+        padding: 5px 8px;
+        border-radius: 6px;
+        font-size: 12px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+    }
 
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .menu-item:hover::after {
+        opacity: 1;
+    }
 
-        section:hover {
-            box-shadow: 0 0 25px rgba(46, 125, 50, 0.5);
-        }
+    /* Header */
+    header {
+        background: linear-gradient(to right, #56ab2f, #a8e063);
+        color: white;
+        text-align: center;
+        padding: 50px 20px;
+    }
 
-        h2 {
-            color: #2e7d32;
-        }
+    /* Sections */
+    section {
+        background: white;
+        margin: 20px;
+        padding: 20px;
+        border-radius: 12px;
+        opacity: 0;           
+        transform: translateY(50px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out, box-shadow 0.3s;
+    }
 
-        img {
-            width: 300px;
-            border-radius: 10px;
-            margin-top: 10px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
+    section.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
 
-        img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(46, 125, 50, 0.7);
-        }
+    section:hover {
+        box-shadow: 0 0 25px rgba(46, 125, 50, 0.5);
+    }
 
-        /* Fun facts slide in from left */
-        .fact-container {
-            overflow: hidden;
-        }
+    h2 {
+        color: #2e7d32;
+    }
 
-        .fact {
-            background: #e8f5e9;
-            padding: 10px;
-            border-left: 5px solid #2e7d32;
-            margin: 10px 0;
+    img {
+        width: 300px;
+        border-radius: 10px;
+        margin-top: 10px;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
 
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out, box-shadow 0.3s;
-        }
+    img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(46, 125, 50, 0.7);
+    }
 
-        .fact.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
+    /* Fun facts */
+    .fact-container {
+        overflow: hidden;
+    }
 
-        .fact:hover {
-            box-shadow: 0 0 15px rgba(46, 125, 50, 0.6);
-            transform: translateY(-2px);
-        }
+    .fact {
+        background: #e8f5e9;
+        padding: 10px;
+        border-left: 5px solid #2e7d32;
+        margin: 10px 0;
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out, box-shadow 0.3s;
+    }
 
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: gray;
-        }
-    </style>
+    .fact.visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .fact:hover {
+        box-shadow: 0 0 15px rgba(46, 125, 50, 0.6);
+        transform: translateY(-2px);
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        color: gray;
+    }
+</style>
 </head>
 
 <body>
 
+<!-- Navbar with hover glow & tooltips -->
 <nav>
-    <a href="#intro">Introduction</a>
-    <a href="#importance">Importance</a>
-    <a href="#bryophyte">Bryophyte</a>
-    <a href="#pteridophyte">Pteridophyte</a>
-    <a href="#conclusion">Conclusion</a>
+    <a href="#intro" class="menu-item" data-tooltip="Learn what plants do and why they matter">Introduction</a>
+    <a href="#importance" class="menu-item" data-tooltip="Discover why plants are essential for life">Importance</a>
+    <a href="#bryophyte" class="menu-item" data-tooltip="Explore mosses and other bryophytes">Bryophyte</a>
+    <a href="#pteridophyte" class="menu-item" data-tooltip="Learn about ferns and pteridophytes">Pteridophyte</a>
+    <a href="#conclusion" class="menu-item" data-tooltip="Wrap up and understand key points">Conclusion</a>
 </nav>
 
 <header>
@@ -120,39 +156,33 @@
     <p>Understanding the role of plants in our world</p>
 </header>
 
+<!-- Sections -->
 <section id="intro">
     <h2>Introduction</h2>
-    <p>Plants might seem simple, but they are one of the most important parts of life on Earth. Every day, we depend on plants without even realizing it. They provide air, food, materials we use in daily life. In this blog, you will know why plants are so important and introduce two major types of plants.</p>
+    <p>Plants might seem simple, but they are one of the most important parts of life on Earth. Every day, we depend on plants without even realizing it. They provide air, food, and materials we use in daily life. In this blog, you will learn why plants are so important and explore two major types of plants.</p>
 </section>
 
 <section id="importance">
     <h2>Importance of Plants</h2>
-
-    <p><b>Oxygen Production:</b> Plants release oxygen by photosynthesis. This process is important because most living organisms need oxygen to survive.</p>
-
-    <p><b>Food Source:</b> Plants are the primary source of food for all living things. Even animals that only eat meat need plants, as the meat they eat gets its food from plants.</p>
-
-    <p><b>Habitat for Animals:</b> Some animals need plants for shelter. For example, squirrels live in trees and some insects hide in plants to keep themselves safe from animals that will eat them.</p>
-
-    <p><b>Climate Regulation:</b> Plants help control the climate by taking in carbon dioxide and releasing oxygen.</p>
+    <p><b>Oxygen Production:</b> Plants release oxygen through photosynthesis, which most living organisms need to survive.</p>
+    <p><b>Food Source:</b> Plants are the primary source of food for all living things. Even meat-eating animals depend on plants indirectly.</p>
+    <p><b>Habitat for Animals:</b> Some animals rely on plants for shelter. For example, squirrels live in trees and insects hide among leaves to stay safe.</p>
+    <p><b>Climate Regulation:</b> Plants absorb carbon dioxide and release oxygen, helping regulate our climate.</p>
 
     <div class="fact-container">
-        <div class="fact">Fun Fact: Some trees release hundreds of liters of water vapor every day, which goes into the atmosphere and cools our environment.</div>
-        <div class="fact">Fun Fact: Without plants, soil would wash away more easily because roots help keep it in place.</div>
+        <div class="fact">Fun Fact: Some trees release hundreds of liters of water vapor daily, which cools the environment.</div>
+        <div class="fact">Fun Fact: Without plants, soil would wash away easily because roots hold it in place.</div>
     </div>
 </section>
 
 <section id="bryophyte">
     <h2>Bryophyte: Moss</h2>
-
     <p><b>Scientific Name:</b> Bryophyta</p>
-
-    <p><b>Description:</b> Mosses are small plants that grow in clusters and stay close to the ground. Unlike most plants, they do not have roots, stems, or leaves. Instead, they absorb water directly from their surroundings.</p>
-
+    <p><b>Description:</b> Mosses are small plants that grow in clusters and stay close to the ground. Unlike most plants, they do not have roots, stems, or leaves and absorb water directly from their surroundings.</p>
     <p><b>Habitat:</b> Moss is usually found in moist, shaded areas such as forest floors, rocks, and near streams.</p>
 
     <div class="fact-container">
-        <div class="fact">Fun Fact: Moss can dry out completely and still come back to life when it gets water again.</div>
+        <div class="fact">Fun Fact: Moss can dry out completely and come back to life when it gets water again.</div>
     </div>
 
     <img src="moss.png">
@@ -160,15 +190,12 @@
 
 <section id="pteridophyte">
     <h2>Pteridophyte: Fern</h2>
-
     <p><b>Scientific Name:</b> Pteridophyta</p>
-
-    <p><b>Description:</b> Ferns are plants with long divided leaves called fronds. They do not produce flowers or seeds and instead reproduce using spores.</p>
-
+    <p><b>Description:</b> Ferns have long divided leaves called fronds. They do not produce flowers or seeds and reproduce using spores.</p>
     <p><b>Habitat:</b> Ferns grow best in damp, shaded environments, especially in forests and areas with high humidity.</p>
 
     <div class="fact-container">
-        <div class="fact">Fun Fact: Some ferns can grow extremely large, with leaves that reach several feet in length.</div>
+        <div class="fact">Fun Fact: Some ferns grow extremely large, with leaves several feet long.</div>
     </div>
 
     <img src="fern.png">
@@ -176,8 +203,7 @@
 
 <section id="conclusion">
     <h2>Conclusion</h2>
-
-    <p>Plants do so much for the world, like providing us with oxygen. Learning about different kinds of plants, like mosses and ferns, helps us appreciate how different and interesting plant life is. Taking care of plants is important because plants are essential for human, animal, and environmental survival.</p>
+    <p>Plants provide oxygen, food, and shelter and play a key role in our environment. Learning about mosses, ferns, and other plants helps us appreciate how diverse plant life is. Protecting plants is essential for humans, animals, and ecosystems alike.</p>
 </section>
 
 <footer>
