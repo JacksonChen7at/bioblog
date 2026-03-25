@@ -65,12 +65,24 @@
             box-shadow: 0 0 20px rgba(46, 125, 50, 0.7);
         }
 
+        /* Fact container animation */
+        .fact-container {
+            overflow: hidden;
+        }
+
         .fact {
             background: #e8f5e9;
             padding: 10px;
             border-left: 5px solid #2e7d32;
             margin: 10px 0;
-            transition: box-shadow 0.3s, transform 0.3s;
+            opacity: 0;
+            transform: translateX(-50px); /* start off left */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fact.visible {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         .fact:hover {
@@ -117,12 +129,9 @@
 
     <p><b>Climate Regulation:</b> Plants help control the climate by taking in carbon dioxide and releasing oxygen.</p>
 
-    <div class="fact">
-        Fun Fact: Some trees release hundreds of liters of water vapor every day, which goes into the atmosphere and cools our environment.
-    </div>
-
-    <div class="fact">
-        Fun Fact: Without plants, soil would wash away more easily because roots help keep it in place.
+    <div class="fact-container">
+        <div class="fact">Fun Fact: Some trees release hundreds of liters of water vapor every day, which goes into the atmosphere and cools our environment.</div>
+        <div class="fact">Fun Fact: Without plants, soil would wash away more easily because roots help keep it in place.</div>
     </div>
 </section>
 
@@ -135,8 +144,8 @@
 
     <p><b>Habitat:</b> Moss is usually found in moist, shaded areas such as forest floors, rocks, and near streams.</p>
 
-    <div class="fact">
-       Fun Fact: Moss can dry out completely and still come back to life when it gets water again.
+    <div class="fact-container">
+        <div class="fact">Fun Fact: Moss can dry out completely and still come back to life when it gets water again.</div>
     </div>
 
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Moss.jpg">
@@ -151,8 +160,8 @@
 
     <p><b>Habitat:</b> Ferns grow best in damp, shaded environments, especially in forests and areas with high humidity.</p>
 
-    <div class="fact">
-        Fun Fact: Some ferns can grow extremely large, with leaves that reach several feet in length.
+    <div class="fact-container">
+        <div class="fact">Fun Fact: Some ferns can grow extremely large, with leaves that reach several feet in length.</div>
     </div>
 
     <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fern.jpg">
@@ -170,8 +179,9 @@
 
 <script>
     const sections = document.querySelectorAll("section");
+    const facts = document.querySelectorAll(".fact");
 
-    function checkSections() {
+    function animate() {
         const triggerBottom = window.innerHeight * 0.85;
 
         sections.forEach(section => {
@@ -183,10 +193,20 @@
                 section.classList.remove("visible");
             }
         });
+
+        facts.forEach(fact => {
+            const factTop = fact.getBoundingClientRect().top;
+
+            if(factTop < triggerBottom) {
+                fact.classList.add("visible");
+            } else {
+                fact.classList.remove("visible");
+            }
+        });
     }
 
-    window.addEventListener("scroll", checkSections);
-    window.addEventListener("load", checkSections);
+    window.addEventListener("scroll", animate);
+    window.addEventListener("load", animate);
 </script>
 
 </body>
